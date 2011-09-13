@@ -6,7 +6,7 @@ Description = "A unit frame alternative"
 
 Author = "NiftyMonkey"
 
-Email = "mark.d.lozano@gmail.com"
+Email = "mark.lozano.gaming@gmail.com"
 
 Version = "0.1"
 
