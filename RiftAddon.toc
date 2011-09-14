@@ -14,13 +14,13 @@ Environment = "1.3"
 
 RunOnStartup = 
 {
-  "src/Constants.lua",
-  "src/Lib.lua",
-  "src/Core.lua",
-  "src/UI.lua",
+	"src/Constants.lua",
+	"src/Lib.lua",
+	"src/Core.lua",
+	"src/UI.lua",
 }
 
 SavedVariables = 
 {
-  NiftyUnitFramesSettings = "character",
+	NiftyUnitFramesSettings = "character",
 }
