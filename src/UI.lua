@@ -28,7 +28,6 @@ function NiftyUnitFrames.UI.Init()
 
     -- only if we haven't already initialized the frames
     if not NiftyUnitFrames.UI.initialized then
-    
         -- get the player detail so we can get all the info
         local playerDetail = NUFLib.GetPlayerDetail()
         -- get some values from the player detail
@@ -117,6 +116,40 @@ function NiftyUnitFrames.UI.UpdatePowerValue(units)
     -- set the width and text to the new values
     pfPower:SetWidth(playerFrame:GetWidth() * percentPowerMultiplier)
     pfPowerText:SetText(formattedPower)
+end
+
+local dragging = false
+local dragOffset = {
+    x = 0,
+    y = 0,
+}
+
+function playerFrame.Event:LeftDown()
+    local mouse = Inspect.Mouse()
+    dragOffset.x = mouse.x - NiftyUnitFramesSettings.PlayerFrame.x
+    dragOffset.y = mouse.y - NiftyUnitFramesSettings.PlayerFrame.y
+    dragging = true
+end
+
+function playerFrame.Event:LeftUpoutside()
+    dragOffset.x = 0
+    dragOffset.y = 0
+    dragging = false
+end
+
+function playerFrame.Event:LeftUp()
+    dragOffset.x = 0
+    dragOffset.y = 0
+    dragging = false
+end
+
+function playerFrame.Event:MouseMove()
+    if dragging then
+        local mouse = Inspect.Mouse()
+        NiftyUnitFramesSettings.PlayerFrame.x = mouse.x - dragOffset.x
+        NiftyUnitFramesSettings.PlayerFrame.y = mouse.y - dragOffset.y
+        playerFrame:SetPoint(NiftyUnitFramesSettings.PlayerFrame.align, UIParent, NiftyUnitFramesSettings.PlayerFrame.align, NiftyUnitFramesSettings.PlayerFrame.x, NiftyUnitFramesSettings.PlayerFrame.y)
+    end
 end
 
 -- When Event.Unit.Available fires it signals the availability of Inspect.Unit.Detail.  This is necessary before we can get player info.  
