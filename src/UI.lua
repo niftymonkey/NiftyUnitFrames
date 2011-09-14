@@ -15,10 +15,12 @@ local pfPlayerInfo = UI.CreateFrame("Text", "pfPlayerInfo", playerFrame)
 -- The health bar
 local pfHealth = UI.CreateFrame("Frame", "pfHealth", playerFrame)
 -- The health bar text
+local pfHealthTextWrapper = UI.CreateFrame("Frame", "pfHealthTextWrapper", playerFrame)
 local pfHealthText = UI.CreateFrame("Text", "pfHealthText", pfHealth)
 -- The "power" bar.  This will be mana or power or energy or whatever the class uses
 local pfPower = UI.CreateFrame("Frame", "pfPower", playerFrame)
 -- The "power" bar text.
+local pfPowerTextWrapper = UI.CreateFrame("Frame", "pfPowerTextWrapper", playerFrame)
 local pfPowerText = UI.CreateFrame("Text", "pfPowerText", pfPower)
 
 -- Initialize the frames.  Use an initialized variable so that we only do this once
@@ -55,10 +57,14 @@ function NiftyUnitFrames.UI.Init()
         pfHealth:SetHeight(playerFrame:GetHeight()/3)
         pfHealth:SetWidth(playerFrame:GetWidth())
         pfHealth:SetBackgroundColor(0, .8, 0, playerFrame:GetAlpha())
+        -- create a power bar text wrapper frame to center anchor our text to.  this will be the same size as a full power bar
+        pfHealthTextWrapper:SetPoint("TOPLEFT", playerFrame, "TOPLEFT", 0, (playerFrame:GetHeight()/3))
+        pfHealthTextWrapper:SetHeight(playerFrame:GetHeight()/3)
+        pfHealthTextWrapper:SetWidth(playerFrame:GetWidth())
         -- create the health bar text inner frame
-        pfHealthText:SetPoint("TOPLEFT", pfHealth, "TOPLEFT", 0, 0)
-        pfHealthText:SetHeight(pfHealth:GetHeight())
-        pfHealthText:SetWidth(pfHealth:GetWidth())
+        pfHealthText:SetPoint("CENTER", pfHealthTextWrapper, "CENTER", 2, 2)
+        pfHealthText:SetHeight(pfHealthTextWrapper:GetHeight())
+        pfHealthText:SetFont(NiftyUnitFrames.AddonName, NUFConst.Resources.fontPath .. "verdana.ttf")
         pfHealthText:SetText(tostring(percentHealth))
 
         -- create the power bar inner frame
@@ -67,10 +73,15 @@ function NiftyUnitFrames.UI.Init()
         pfPower:SetWidth(playerFrame:GetWidth())
         -- set the background color based on the unit's calling
         pfPower:SetBackgroundColor(pbColor.r, pbColor.g, pbColor.b, playerFrame:GetAlpha())
-        -- create the power bar text inner frame
-        pfPowerText:SetPoint("TOPLEFT", pfPower, "TOPLEFT", 0, 0)
-        pfPowerText:SetHeight(pfPower:GetHeight())
-        pfPowerText:SetWidth(pfPower:GetWidth())
+
+        -- create a power bar text wrapper frame to center anchor our text to.  this will be the same size as a full power bar
+        pfPowerTextWrapper:SetPoint("TOPLEFT", playerFrame, "TOPLEFT", 0, (playerFrame:GetHeight()/3)*2)
+        pfPowerTextWrapper:SetHeight(playerFrame:GetHeight()/3)
+        pfPowerTextWrapper:SetWidth(playerFrame:GetWidth())
+        -- create our power text frame
+        pfPowerText:SetPoint("CENTER", pfPowerTextWrapper, "CENTER", 2, 2)
+        pfPowerText:SetHeight(pfPowerTextWrapper:GetHeight())
+        pfPowerText:SetFont(NiftyUnitFrames.AddonName, NUFConst.Resources.fontPath .. "verdana.ttf")
         pfPowerText:SetText(tostring(percentPower))
 
         NiftyUnitFrames.UI.initialized = true

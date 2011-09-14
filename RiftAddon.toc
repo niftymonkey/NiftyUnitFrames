@@ -2,25 +2,25 @@ Identifier = "NiftyUnitFrames"
 
 Name = "Nifty Unit Frames"
 
-Description = "A unit frame alternative"
+Description = "A simple and clean unit frame alternative."
 
 Author = "NiftyMonkey"
 
 Email = "mark.lozano.gaming@gmail.com"
 
-Version = "0.1"
+Version = "0.2"
 
 Environment = "1.3"
 
 RunOnStartup = 
 {
-	"src/Constants.lua",
-	"src/Lib.lua",
-	"src/Core.lua",
-	"src/UI.lua",
+    "src/Constants.lua",
+    "src/Lib.lua",
+    "src/Core.lua",
+    "src/UI.lua",
 }
 
 SavedVariables = 
 {
-	NiftyUnitFramesSettings = "character",
+    NiftyUnitFramesSettings = "character",
 }
